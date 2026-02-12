@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de E-mails</title>
+</head>
+<body>
+    <h1>Consulta de E-mails</h1>
+    <form method="POST">
+        <label for="emails">Insira os e-mails (um por linha):</label><br>
+        <textarea name="emails" id="emails" rows="10" cols="30"></textarea><br><br>
+        <button type="submit">Consultar E-mails</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    {% if not_found_emails %}
+        <h3>E-mails sem retorno:</h3>
+        <ul>
+            {% for email in not_found_emails %}
+                <li>{{ email }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('download', filename=result_file) }}">Baixar Resultado</a>
+    {% endif %}
+</body>
+</html>
